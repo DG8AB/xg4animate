@@ -5,12 +5,108 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>xg4 animate</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-      body {
-        background-color: #111827;
+      @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+
+
+      :root {
+        --bg-color: #0d0c1d;
+        --primary-color: #00f5ff;
+        --accent-color: #7d26cd;
+        --text-color: #e0e6f0;
+        --text-muted-color: #8a93a5;
+        --surface-color: rgba(22, 28, 51, 0.6);
+        --border-color: rgba(0, 245, 255, 0.2);
+        --glow-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+        --error-color: #ff4d6d;
       }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Rajdhani', sans-serif;
+        background-image:
+          linear-gradient(var(--border-color) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: bg-pan 6s linear infinite;
+        overflow-x: hidden;
+      }
+
+      @keyframes bg-pan {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: -50px -50px;
+        }
+      }
+
+      .futuristic-card {
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+        transition: all 0.3s ease;
+      }
+
+      .futuristic-card:hover {
+          box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
+          border-color: rgba(0, 245, 255, 0.5);
+      }
+
+      .futuristic-btn {
+        clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+        transition: all 0.2s ease-in-out;
+        border: 1px solid var(--primary-color);
+      }
+
+      .futuristic-btn:hover:not(:disabled) {
+        box-shadow: var(--glow-shadow);
+        transform: translateY(-2px);
+      }
+      
+      .futuristic-btn:disabled {
+          border-color: var(--text-muted-color);
+          background-color: transparent !important;
+          color: var(--text-muted-color) !important;
+          cursor: not-allowed;
+      }
+
+      .text-glow {
+        text-shadow: 0 0 8px var(--primary-color), 0 0 10px var(--accent-color);
+      }
+
+      .placeholder-text-muted-color::placeholder {
+        color: var(--text-muted-color);
+        opacity: 1;
+      }
+
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Custom config for tailwind to use our vars
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary-color': 'var(--primary-color)',
+              'bg-color': 'var(--bg-color)',
+              'text-color': 'var(--text-color)',
+              'text-muted-color': 'var(--text-muted-color)',
+              'border-color': 'var(--border-color)',
+              'error-color': 'var(--error-color)',
+            },
+            fontFamily: {
+              mono: ['Roboto Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
   <script type="importmap">
 {
   "imports": {

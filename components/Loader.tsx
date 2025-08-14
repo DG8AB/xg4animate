@@ -1,32 +1,37 @@
-
 import React from 'react';
 
 interface LoaderProps {
   message: string;
 }
 
-const FilmStripIcon: React.FC = () => (
-  <svg className="w-12 h-12 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-    <line x1="7" y1="2" x2="7" y2="22"></line>
-    <line x1="17" y1="2" x2="17" y2="22"></line>
-    <line x1="2" y1="12" x2="22" y2="12"></line>
-    <line x1="2" y1="7" x2="7" y2="7"></line>
-    <line x1="2" y1="17" x2="7" y2="17"></line>
-    <line x1="17" y1="17" x2="22" y2="17"></line>
-    <line x1="17" y1="7" x2="22" y2="7"></line>
-  </svg>
+const FuturisticLoaderIcon: React.FC = () => (
+    <svg className="w-24 h-24 text-primary-color" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor: 'var(--accent-color)', stopOpacity:1}} />
+                <stop offset="100%" style={{stopColor: 'var(--primary-color)', stopOpacity:1}} />
+            </linearGradient>
+        </defs>
+        <path d="M50 2.5A47.5 47.5 0 0 1 97.5 50" stroke="url(#grad1)" strokeWidth="5" strokeLinecap="round">
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" />
+        </path>
+        <path d="M50 97.5A47.5 47.5 0 0 1 2.5 50" stroke="var(--primary-color)" strokeOpacity="0.3" strokeWidth="5" strokeLinecap="round" />
+        <circle cx="50" cy="50" r="35" stroke="var(--primary-color)" strokeOpacity="0.5" strokeWidth="2">
+            <animate attributeName="r" from="35" to="40" dur="1.5s" repeatCount="indefinite" begin="0s" values="35;40;35" keyTimes="0;0.5;1"/>
+            <animate attributeName="stroke-opacity" from="0.5" to="0" dur="1.5s" repeatCount="indefinite" begin="0s" values="0.5;0;0.5" keyTimes="0;0.5;1"/>
+        </circle>
+        <circle cx="50" cy="50" r="25" stroke="var(--accent-color)" strokeOpacity="0.8" strokeWidth="1">
+             <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="2s" repeatCount="indefinite" />
+        </circle>
+    </svg>
 );
 
 
 const Loader: React.FC<LoaderProps> = ({ message }) => {
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-80 flex flex-col justify-center items-center z-50 backdrop-blur-sm">
-      <div className="relative flex justify-center items-center">
-        <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-cyan-500"></div>
-        <FilmStripIcon />
-      </div>
-      <p className="mt-6 text-xl text-white font-semibold text-center px-4">{message}</p>
+    <div className="fixed inset-0 bg-bg-color/80 flex flex-col justify-center items-center z-50 backdrop-blur-sm">
+      <FuturisticLoaderIcon />
+      <p className="mt-8 text-xl text-primary-color font-bold tracking-wider text-center px-4">{message}</p>
     </div>
   );
 };

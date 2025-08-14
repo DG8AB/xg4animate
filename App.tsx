@@ -41,16 +41,14 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
+    <div className="min-h-screen font-sans">
       {isLoading && <Loader message={loadingMessage} />}
       <div className="container mx-auto px-4 py-8">
-        <header className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-500">
-              xg4 animate
-            </span>
+        <header className="text-center mb-12 pt-8">
+          <h1 className="text-6xl font-bold tracking-tighter text-glow">
+            xg4 animate
           </h1>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-text-muted-color max-w-3xl mx-auto">
             Bring your ideas to life. Describe a scene, and let our AI create an animation for you.
           </p>
         </header>
@@ -58,8 +56,8 @@ const App: React.FC = () => {
         <main className="flex flex-col items-center w-full">
           <PromptForm onSubmit={handleGenerate} isLoading={isLoading} />
           {error && (
-            <div className="mt-6 bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg w-full max-w-3xl" role="alert">
-              <strong className="font-bold">Error: </strong>
+            <div className="mt-8 futuristic-card bg-red-900/50 border-error-color text-red-200 px-6 py-4 w-full max-w-3xl" role="alert">
+              <strong className="font-bold text-red-100">ERROR: </strong>
               <span className="block sm:inline">{error}</span>
             </div>
           )}

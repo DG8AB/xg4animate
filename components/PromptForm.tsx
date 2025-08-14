@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface PromptFormProps {
@@ -6,18 +5,18 @@ interface PromptFormProps {
   isLoading: boolean;
 }
 
-const WandIcon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M17.293 2.293a1 1 0 011.414 0l.001.001a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L6 12.586l10.293-10.293a1 1 0 011.414-.001z" clipRule="evenodd" />
-    <path fillRule="evenodd" d="M11.172 6.172a.5.5 0 01.707 0l2.5 2.5a.5.5 0 010 .707l-2.5 2.5a.5.5 0 01-.707-.707L12.664 9.5H2.5a.5.5 0 010-1h10.164l-1.192-1.192a.5.5 0 010-.707z" clipRule="evenodd" />
-    <path d="M16 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1z" />
+const GenerateIcon: React.FC = () => (
+  <svg className="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3v6M12 15v6M5.64 5.64l4.24 4.24M14.12 14.12l4.24 4.24M3 12h6M15 12h6M5.64 18.36l4.24-4.24M14.12 9.88l4.24-4.24" />
   </svg>
 );
 
 const UploadIcon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-  </svg>
+    <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="17 8 12 3 7 8" />
+        <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
 );
 
 
@@ -48,19 +47,23 @@ const PromptForm: React.FC<PromptFormProps> = ({ onSubmit, isLoading }) => {
   const removeImage = () => {
       setImageFile(null);
       setImagePreview(null);
+      const fileInput = document.getElementById('image-upload') as HTMLInputElement;
+      if (fileInput) {
+        fileInput.value = '';
+      }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-2xl w-full max-w-3xl space-y-4 border border-gray-700">
+    <form onSubmit={handleSubmit} className="futuristic-card p-6 w-full max-w-3xl space-y-6">
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Describe the animation you want to create... e.g., 'A cat wearing a wizard hat casting a spell'"
-        className="w-full p-4 bg-gray-900 text-white rounded-md focus:ring-2 focus:ring-cyan-500 focus:outline-none transition duration-200 h-28 resize-none"
+        className="w-full p-4 bg-black/40 text-text-color rounded-md border border-border-color focus:ring-1 focus:ring-primary-color focus:outline-none focus:border-primary-color transition duration-200 h-28 resize-none placeholder-text-muted-color"
         disabled={isLoading}
       />
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="image-upload" className="flex-1 cursor-pointer bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md transition duration-200 flex items-center justify-center">
+      <div className="flex flex-col sm:flex-row items-stretch justify-between gap-4">
+        <label htmlFor="image-upload" className="flex-1 cursor-pointer border border-border-color hover:bg-primary-color/10 text-primary-color font-bold py-3 px-4 rounded-md transition duration-200 flex items-center justify-center">
           <UploadIcon />
           {imageFile ? "Change Image" : "Upload Image (Optional)"}
         </label>
@@ -69,16 +72,16 @@ const PromptForm: React.FC<PromptFormProps> = ({ onSubmit, isLoading }) => {
         <button
           type="submit"
           disabled={isLoading || !prompt.trim()}
-          className="flex-1 bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-500 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded-md transition duration-200 flex items-center justify-center"
+          className="flex-1 futuristic-btn bg-primary-color text-bg-color font-bold py-3 px-4 flex items-center justify-center text-lg hover:bg-primary-color/90"
         >
-          <WandIcon />
-          Generate Animation
+          <GenerateIcon />
+          Generate
         </button>
       </div>
       {imagePreview && (
-        <div className="mt-4 relative w-40 h-40 mx-auto">
-          <img src={imagePreview} alt="Image preview" className="rounded-lg object-cover w-full h-full" />
-           <button onClick={removeImage} className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-7 w-7 flex items-center justify-center text-lg font-bold hover:bg-red-700">&times;</button>
+        <div className="mt-4 relative w-40 h-40 mx-auto p-1 border border-border-color" style={{clipPath: 'polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)'}}>
+          <img src={imagePreview} alt="Image preview" className="object-cover w-full h-full" />
+           <button type="button" onClick={removeImage} className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full h-7 w-7 flex items-center justify-center text-lg font-bold hover:bg-red-700 border-2 border-bg-color">&times;</button>
         </div>
       )}
     </form>
