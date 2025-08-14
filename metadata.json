@@ -1,0 +1,5 @@
+{
+  "name": "xg4 animate",
+  "description": "An application that generates short video animations from text prompts and optional images using Google's Gemini AI. Watch your ideas come to life in seconds.",
+  "requestFramePermissions": []
+}
